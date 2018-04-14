@@ -1,0 +1,811 @@
+var _user$project$Task$subscriptions = function (model) {
+	return _elm_lang$core$Platform_Sub$none;
+};
+var _user$project$Task$errorMessage = function (error) {
+	var _p0 = error;
+	switch (_p0.ctor) {
+		case 'BadUrl':
+			return _p0._0;
+		case 'Timeout':
+			return 'Timeout';
+		case 'NetworkError':
+			return 'NetworkError';
+		case 'BadStatus':
+			var _p1 = _p0._0;
+			return A2(
+				_elm_lang$core$Basics_ops['++'],
+				_p1.url,
+				A2(_elm_lang$core$Basics_ops['++'], ' ', _p1.status.message));
+		default:
+			var _p2 = _p0._1;
+			return A2(
+				_elm_lang$core$Basics_ops['++'],
+				_p0._0,
+				A2(
+					_elm_lang$core$Basics_ops['++'],
+					_p2.url,
+					A2(_elm_lang$core$Basics_ops['++'], ' ', _p2.status.message)));
+	}
+};
+var _user$project$Task$viewStatus = F2(
+	function (field, status) {
+		return A2(
+			_elm_lang$html$Html$p,
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html_Attributes$class('comments'),
+				_1: {ctor: '[]'}
+			},
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html$text(
+					A2(
+						_elm_lang$core$Basics_ops['++'],
+						field,
+						A2(
+							_elm_lang$core$Basics_ops['++'],
+							': ',
+							function () {
+								var _p3 = status;
+								if (_p3.ctor === 'Nothing') {
+									return '';
+								} else {
+									var _p5 = _p3._0;
+									var _p4 = _p5;
+									switch (_p4) {
+										case 'unplanned':
+											return 'Unplanned';
+										case 'planned':
+											return 'Planned';
+										case 'done':
+											return 'Done';
+										case 'deleted':
+											return 'Deleted';
+										default:
+											return _p5;
+									}
+								}
+							}()))),
+				_1: {ctor: '[]'}
+			});
+	});
+var _user$project$Task$viewUrgency = F2(
+	function (field, urgency) {
+		return A2(
+			_elm_lang$html$Html$p,
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html_Attributes$class('comments'),
+				_1: {ctor: '[]'}
+			},
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html$text(
+					A2(
+						_elm_lang$core$Basics_ops['++'],
+						field,
+						A2(
+							_elm_lang$core$Basics_ops['++'],
+							': ',
+							function () {
+								var _p6 = urgency;
+								if (_p6.ctor === 'Nothing') {
+									return '';
+								} else {
+									var _p8 = _p6._0;
+									var _p7 = _p8;
+									switch (_p7) {
+										case 'just_do_it':
+											return 'Just Do It';
+										case 'plan_it':
+											return 'Plan It';
+										case 'delegate_it':
+											return 'Delegate It';
+										case 'dont_do_it':
+											return 'Don\'t Do It';
+										default:
+											return _p8;
+									}
+								}
+							}()))),
+				_1: {ctor: '[]'}
+			});
+	});
+var _user$project$Task$viewDuration = F2(
+	function (field, duration) {
+		return A2(
+			_elm_lang$html$Html$p,
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html_Attributes$class('comments'),
+				_1: {ctor: '[]'}
+			},
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html$text(
+					A2(
+						_elm_lang$core$Basics_ops['++'],
+						field,
+						A2(
+							_elm_lang$core$Basics_ops['++'],
+							': ',
+							A2(
+								_elm_lang$core$Basics_ops['++'],
+								_elm_lang$core$Basics$toString(
+									A2(_elm_lang$core$Maybe$withDefault, 0, duration)),
+								' min.')))),
+				_1: {ctor: '[]'}
+			});
+	});
+var _user$project$Task$viewTime = F2(
+	function (field, time) {
+		return A2(
+			_elm_lang$html$Html$p,
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html_Attributes$class('comments'),
+				_1: {ctor: '[]'}
+			},
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html$text(
+					function () {
+						var _p9 = time;
+						if (_p9.ctor === 'Nothing') {
+							return field;
+						} else {
+							var _p10 = _p9._0;
+							return A2(
+								_elm_lang$core$Basics_ops['++'],
+								field,
+								A2(
+									_elm_lang$core$Basics_ops['++'],
+									': ',
+									A2(
+										_elm_lang$core$Basics_ops['++'],
+										_elm_lang$core$Basics$toString(
+											_elm_lang$core$Date$hour(
+												_elm_lang$core$Date$fromTime(_p10))),
+										A2(
+											_elm_lang$core$Basics_ops['++'],
+											':',
+											_elm_lang$core$Basics$toString(
+												_elm_lang$core$Date$minute(
+													_elm_lang$core$Date$fromTime(_p10)))))));
+						}
+					}()),
+				_1: {ctor: '[]'}
+			});
+	});
+var _user$project$Task$viewDate = F2(
+	function (field, date) {
+		return A2(
+			_elm_lang$html$Html$p,
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html_Attributes$class('comments'),
+				_1: {ctor: '[]'}
+			},
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html$text(
+					function () {
+						var _p11 = date;
+						if (_p11.ctor === 'Nothing') {
+							return field;
+						} else {
+							var _p12 = _p11._0;
+							return A2(
+								_elm_lang$core$Basics_ops['++'],
+								field,
+								A2(
+									_elm_lang$core$Basics_ops['++'],
+									': ',
+									A2(
+										_elm_lang$core$Basics_ops['++'],
+										_elm_lang$core$Basics$toString(
+											_elm_lang$core$Date$day(_p12)),
+										A2(
+											_elm_lang$core$Basics_ops['++'],
+											' ',
+											A2(
+												_elm_lang$core$Basics_ops['++'],
+												_elm_lang$core$Basics$toString(
+													_elm_lang$core$Date$month(_p12)),
+												A2(
+													_elm_lang$core$Basics_ops['++'],
+													' ',
+													_elm_lang$core$Basics$toString(
+														_elm_lang$core$Date$year(_p12))))))));
+						}
+					}()),
+				_1: {ctor: '[]'}
+			});
+	});
+var _user$project$Task$dropNth = function (n) {
+	return _elm_lang$core$List$filter(
+		function (_p13) {
+			return A2(
+				F2(
+					function (x, y) {
+						return !_elm_lang$core$Native_Utils.eq(x, y);
+					}),
+				n,
+				function (_) {
+					return _.id;
+				}(_p13));
+		});
+};
+var _user$project$Task$getNth = function (n) {
+	return _elm_community$list_extra$List_Extra$find(
+		function (_p14) {
+			return A2(
+				F2(
+					function (x, y) {
+						return _elm_lang$core$Native_Utils.eq(x, y);
+					}),
+				n,
+				function (_) {
+					return _.id;
+				}(_p14));
+		});
+};
+var _user$project$Task$findTask = F2(
+	function (id, tasks) {
+		findTask:
+		while (true) {
+			var _p15 = tasks;
+			if (_p15.ctor === '[]') {
+				return _elm_lang$core$Maybe$Nothing;
+			} else {
+				var _p16 = _p15._0;
+				if (_elm_lang$core$Native_Utils.eq(_p16.id, id)) {
+					return _elm_lang$core$Maybe$Just(_p16);
+				} else {
+					var _v8 = id,
+						_v9 = _p15._1;
+					id = _v8;
+					tasks = _v9;
+					continue findTask;
+				}
+			}
+		}
+	});
+var _user$project$Task$time = function () {
+	var convert = function (raw) {
+		var _p17 = _elm_lang$core$Date$fromString(raw);
+		if (_p17.ctor === 'Ok') {
+			return _elm_lang$core$Json_Decode$succeed(
+				_elm_lang$core$Date$toTime(_p17._0));
+		} else {
+			return _elm_lang$core$Json_Decode$fail(_p17._0);
+		}
+	};
+	return A2(_elm_lang$core$Json_Decode$andThen, convert, _elm_lang$core$Json_Decode$string);
+}();
+var _user$project$Task$date = function () {
+	var convert = function (raw) {
+		var _p18 = _elm_lang$core$Date$fromString(raw);
+		if (_p18.ctor === 'Ok') {
+			return _elm_lang$core$Json_Decode$succeed(_p18._0);
+		} else {
+			return _elm_lang$core$Json_Decode$fail(_p18._0);
+		}
+	};
+	return A2(_elm_lang$core$Json_Decode$andThen, convert, _elm_lang$core$Json_Decode$string);
+}();
+var _user$project$Task$baseUrl = 'http://localhost:3002/api/v1/tasks';
+var _user$project$Task$Task = function (a) {
+	return function (b) {
+		return function (c) {
+			return function (d) {
+				return function (e) {
+					return function (f) {
+						return function (g) {
+							return function (h) {
+								return function (i) {
+									return function (j) {
+										return {id: a, title: b, description: c, urgency: d, duration_minutes: e, attention_date: f, deadline: g, planned_date: h, planned_starting_time: i, status: j};
+									};
+								};
+							};
+						};
+					};
+				};
+			};
+		};
+	};
+};
+var _user$project$Task$taskDecoder = A3(
+	_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+	'status',
+	_elm_lang$core$Json_Decode$nullable(_elm_lang$core$Json_Decode$string),
+	A3(
+		_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+		'planned_starting_time',
+		_elm_lang$core$Json_Decode$nullable(_user$project$Task$time),
+		A3(
+			_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+			'planned_date',
+			_elm_lang$core$Json_Decode$nullable(_user$project$Task$date),
+			A3(
+				_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+				'deadline',
+				_elm_lang$core$Json_Decode$nullable(_user$project$Task$date),
+				A3(
+					_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+					'attention_date',
+					_elm_lang$core$Json_Decode$nullable(_user$project$Task$date),
+					A3(
+						_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+						'duration_minutes',
+						_elm_lang$core$Json_Decode$nullable(_elm_lang$core$Json_Decode$int),
+						A3(
+							_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+							'urgency',
+							_elm_lang$core$Json_Decode$nullable(_elm_lang$core$Json_Decode$string),
+							A3(
+								_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+								'description',
+								_elm_lang$core$Json_Decode$nullable(_elm_lang$core$Json_Decode$string),
+								A3(
+									_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+									'title',
+									_elm_lang$core$Json_Decode$string,
+									A3(
+										_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$required,
+										'id',
+										_elm_lang$core$Json_Decode$int,
+										_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$decode(_user$project$Task$Task)))))))))));
+var _user$project$Task$Model = F4(
+	function (a, b, c, d) {
+		return {tasks: a, task: b, error: c, display: d};
+	});
+var _user$project$Task$Show = {ctor: 'Show'};
+var _user$project$Task$Index = {ctor: 'Index'};
+var _user$project$Task$initialModel = {
+	tasks: {ctor: '[]'},
+	task: _elm_lang$core$Maybe$Nothing,
+	error: _elm_lang$core$Maybe$Nothing,
+	display: _user$project$Task$Index
+};
+var _user$project$Task$update = F2(
+	function (msg, model) {
+		var _p19 = msg;
+		switch (_p19.ctor) {
+			case 'LoadTasks':
+				if (_p19._0.ctor === 'Ok') {
+					return {
+						ctor: '_Tuple2',
+						_0: _elm_lang$core$Native_Utils.update(
+							model,
+							{tasks: _p19._0._0, error: _elm_lang$core$Maybe$Nothing, display: _user$project$Task$Index}),
+						_1: _elm_lang$core$Platform_Cmd$none
+					};
+				} else {
+					return {
+						ctor: '_Tuple2',
+						_0: _elm_lang$core$Native_Utils.update(
+							model,
+							{
+								error: _elm_lang$core$Maybe$Just(_p19._0._0)
+							}),
+						_1: _elm_lang$core$Platform_Cmd$none
+					};
+				}
+			case 'LoadTask':
+				if (_p19._0.ctor === 'Ok') {
+					return {
+						ctor: '_Tuple2',
+						_0: _elm_lang$core$Native_Utils.update(
+							model,
+							{
+								task: _elm_lang$core$Maybe$Just(_p19._0._0),
+								error: _elm_lang$core$Maybe$Nothing,
+								display: _user$project$Task$Show
+							}),
+						_1: _elm_lang$core$Platform_Cmd$none
+					};
+				} else {
+					return {
+						ctor: '_Tuple2',
+						_0: _elm_lang$core$Native_Utils.update(
+							model,
+							{
+								task: _elm_lang$core$Maybe$Nothing,
+								error: _elm_lang$core$Maybe$Just(_p19._0._0)
+							}),
+						_1: _elm_lang$core$Platform_Cmd$none
+					};
+				}
+			case 'ShowTask':
+				return {
+					ctor: '_Tuple2',
+					_0: _elm_lang$core$Native_Utils.update(
+						model,
+						{
+							task: A2(_user$project$Task$getNth, _p19._0, model.tasks),
+							error: _elm_lang$core$Maybe$Nothing,
+							display: _user$project$Task$Show
+						}),
+					_1: _elm_lang$core$Platform_Cmd$none
+				};
+			case 'DeleteTask':
+				return {
+					ctor: '_Tuple2',
+					_0: _elm_lang$core$Native_Utils.update(
+						model,
+						{
+							tasks: A2(_user$project$Task$dropNth, _p19._0, model.tasks),
+							task: _elm_lang$core$Maybe$Nothing,
+							error: _elm_lang$core$Maybe$Nothing,
+							display: _user$project$Task$Index
+						}),
+					_1: _elm_lang$core$Platform_Cmd$none
+				};
+			default:
+				return {
+					ctor: '_Tuple2',
+					_0: _elm_lang$core$Native_Utils.update(
+						model,
+						{display: _user$project$Task$Index}),
+					_1: _elm_lang$core$Platform_Cmd$none
+				};
+		}
+	});
+var _user$project$Task$ShowTasks = {ctor: 'ShowTasks'};
+var _user$project$Task$DeleteTask = function (a) {
+	return {ctor: 'DeleteTask', _0: a};
+};
+var _user$project$Task$viewTask = function (maybeTask) {
+	var _p20 = maybeTask;
+	if (_p20.ctor === 'Just') {
+		var _p21 = _p20._0;
+		return A2(
+			_elm_lang$html$Html$div,
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html_Attributes$class('detailed-task'),
+				_1: {ctor: '[]'}
+			},
+			{
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$div,
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$class('task-info'),
+						_1: {
+							ctor: '::',
+							_0: _elm_lang$html$Html_Events$onClick(_user$project$Task$ShowTasks),
+							_1: {ctor: '[]'}
+						}
+					},
+					{
+						ctor: '::',
+						_0: A2(
+							_elm_lang$html$Html$h2,
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html_Attributes$class('caption'),
+								_1: {ctor: '[]'}
+							},
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html$text(_p21.title),
+								_1: {ctor: '[]'}
+							}),
+						_1: {
+							ctor: '::',
+							_0: A2(
+								_elm_lang$html$Html$h3,
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html_Attributes$class('comments'),
+									_1: {ctor: '[]'}
+								},
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html$text(
+										A2(_elm_lang$core$Maybe$withDefault, '', _p21.description)),
+									_1: {ctor: '[]'}
+								}),
+							_1: {
+								ctor: '::',
+								_0: A2(_user$project$Task$viewUrgency, 'Urgency', _p21.urgency),
+								_1: {
+									ctor: '::',
+									_0: A2(_user$project$Task$viewDuration, 'Duration', _p21.duration_minutes),
+									_1: {
+										ctor: '::',
+										_0: A2(_user$project$Task$viewDate, 'Attention Date', _p21.attention_date),
+										_1: {
+											ctor: '::',
+											_0: A2(_user$project$Task$viewDate, 'Deadline', _p21.deadline),
+											_1: {
+												ctor: '::',
+												_0: A2(_user$project$Task$viewDate, 'Planned Date', _p21.planned_date),
+												_1: {
+													ctor: '::',
+													_0: A2(_user$project$Task$viewTime, 'Planned Starting Time', _p21.planned_starting_time),
+													_1: {
+														ctor: '::',
+														_0: A2(_user$project$Task$viewStatus, 'Status Fidus', _p21.status),
+														_1: {
+															ctor: '::',
+															_0: A2(
+																_elm_lang$html$Html$button,
+																{
+																	ctor: '::',
+																	_0: _elm_lang$html$Html_Attributes$class('new-comment'),
+																	_1: {
+																		ctor: '::',
+																		_0: _elm_lang$html$Html_Events$onClick(_user$project$Task$ShowTasks),
+																		_1: {ctor: '[]'}
+																	}
+																},
+																{
+																	ctor: '::',
+																	_0: _elm_lang$html$Html$text('Edit'),
+																	_1: {ctor: '[]'}
+																}),
+															_1: {
+																ctor: '::',
+																_0: A2(
+																	_elm_lang$html$Html$button,
+																	{
+																		ctor: '::',
+																		_0: _elm_lang$html$Html_Attributes$class('new-comment'),
+																		_1: {
+																			ctor: '::',
+																			_0: _elm_lang$html$Html_Events$onClick(
+																				_user$project$Task$DeleteTask(_p21.id)),
+																			_1: {ctor: '[]'}
+																		}
+																	},
+																	{
+																		ctor: '::',
+																		_0: _elm_lang$html$Html$text('Delete'),
+																		_1: {ctor: '[]'}
+																	}),
+																_1: {ctor: '[]'}
+															}
+														}
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}),
+				_1: {ctor: '[]'}
+			});
+	} else {
+		return A2(
+			_elm_lang$html$Html$div,
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html_Attributes$class('loading-task'),
+				_1: {ctor: '[]'}
+			},
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html$text('Loading Task ... v2'),
+				_1: {ctor: '[]'}
+			});
+	}
+};
+var _user$project$Task$ShowTask = function (a) {
+	return {ctor: 'ShowTask', _0: a};
+};
+var _user$project$Task$viewDetailedTask = function (task) {
+	return A2(
+		_elm_lang$html$Html$div,
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$class('detailed-task'),
+			_1: {ctor: '[]'}
+		},
+		{
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$div,
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$class('task-info'),
+					_1: {
+						ctor: '::',
+						_0: _elm_lang$html$Html_Events$onClick(
+							_user$project$Task$ShowTask(task.id)),
+						_1: {ctor: '[]'}
+					}
+				},
+				{
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$h2,
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$class('caption'),
+							_1: {ctor: '[]'}
+						},
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html$text(task.title),
+							_1: {ctor: '[]'}
+						}),
+					_1: {
+						ctor: '::',
+						_0: A2(
+							_elm_lang$html$Html$h3,
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html_Attributes$class('comments'),
+								_1: {ctor: '[]'}
+							},
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html$text(
+									A2(_elm_lang$core$Maybe$withDefault, '', task.description)),
+								_1: {ctor: '[]'}
+							}),
+						_1: {ctor: '[]'}
+					}
+				}),
+			_1: {ctor: '[]'}
+		});
+};
+var _user$project$Task$viewTasks = function (tasks) {
+	return A2(
+		_elm_lang$html$Html$div,
+		{ctor: '[]'},
+		A2(_elm_lang$core$List$map, _user$project$Task$viewDetailedTask, tasks));
+};
+var _user$project$Task$viewContent = function (model) {
+	var _p22 = model.error;
+	if (_p22.ctor === 'Just') {
+		return A2(
+			_elm_lang$html$Html$div,
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html_Attributes$class('tasks-error'),
+				_1: {ctor: '[]'}
+			},
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html$text(
+					_user$project$Task$errorMessage(_p22._0)),
+				_1: {ctor: '[]'}
+			});
+	} else {
+		return A2(
+			_elm_lang$html$Html$div,
+			{ctor: '[]'},
+			{
+				ctor: '::',
+				_0: _user$project$Task$viewTasks(model.tasks),
+				_1: {ctor: '[]'}
+			});
+	}
+};
+var _user$project$Task$view = function (model) {
+	var _p23 = model.display;
+	if (_p23.ctor === 'Index') {
+		return A2(
+			_elm_lang$html$Html$div,
+			{ctor: '[]'},
+			{
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$div,
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$class('header'),
+						_1: {ctor: '[]'}
+					},
+					{
+						ctor: '::',
+						_0: A2(
+							_elm_lang$html$Html$h1,
+							{ctor: '[]'},
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html$text('Tasks'),
+								_1: {ctor: '[]'}
+							}),
+						_1: {ctor: '[]'}
+					}),
+				_1: {
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$div,
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$class('content-flow'),
+							_1: {ctor: '[]'}
+						},
+						{
+							ctor: '::',
+							_0: _user$project$Task$viewContent(model),
+							_1: {ctor: '[]'}
+						}),
+					_1: {ctor: '[]'}
+				}
+			});
+	} else {
+		return A2(
+			_elm_lang$html$Html$div,
+			{ctor: '[]'},
+			{
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$div,
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$class('header'),
+						_1: {ctor: '[]'}
+					},
+					{
+						ctor: '::',
+						_0: A2(
+							_elm_lang$html$Html$h1,
+							{ctor: '[]'},
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html$text('Task'),
+								_1: {ctor: '[]'}
+							}),
+						_1: {ctor: '[]'}
+					}),
+				_1: {
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$div,
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$class('content-flow'),
+							_1: {ctor: '[]'}
+						},
+						{
+							ctor: '::',
+							_0: _user$project$Task$viewTask(model.task),
+							_1: {ctor: '[]'}
+						}),
+					_1: {ctor: '[]'}
+				}
+			});
+	}
+};
+var _user$project$Task$LoadTask = function (a) {
+	return {ctor: 'LoadTask', _0: a};
+};
+var _user$project$Task$fetchTask = function (id) {
+	return A2(
+		_elm_lang$http$Http$send,
+		_user$project$Task$LoadTask,
+		A2(
+			_elm_lang$http$Http$get,
+			A2(
+				_elm_lang$core$Basics_ops['++'],
+				_user$project$Task$baseUrl,
+				A2(
+					_elm_lang$core$Basics_ops['++'],
+					'/',
+					_elm_lang$core$Basics$toString(id))),
+			_user$project$Task$taskDecoder));
+};
+var _user$project$Task$LoadTasks = function (a) {
+	return {ctor: 'LoadTasks', _0: a};
+};
+var _user$project$Task$fetchTasks = A2(
+	_elm_lang$http$Http$send,
+	_user$project$Task$LoadTasks,
+	A2(
+		_elm_lang$http$Http$get,
+		_user$project$Task$baseUrl,
+		_elm_lang$core$Json_Decode$list(_user$project$Task$taskDecoder)));
+var _user$project$Task$init = {ctor: '_Tuple2', _0: _user$project$Task$initialModel, _1: _user$project$Task$fetchTasks};
+var _user$project$Task$main = _elm_lang$html$Html$program(
+	{init: _user$project$Task$init, view: _user$project$Task$view, update: _user$project$Task$update, subscriptions: _user$project$Task$subscriptions})();
