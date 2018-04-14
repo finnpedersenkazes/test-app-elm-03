@@ -84,6 +84,7 @@ type alias Model =
     , task : Maybe Task
     , error : Maybe Http.Error
     , display : TaskState
+    , message : String
     }
 
 
@@ -93,6 +94,7 @@ initialModel =
     , task = Nothing
     , error = Nothing
     , display = Index
+    , message = ""
     }
 
 
@@ -338,13 +340,25 @@ viewContent model =
             div [] [ viewTasks model.tasks ]
 
 
+viewMessage : Model -> Html Msg
+viewMessage model =
+    case model.message of
+        "" ->
+            text "Everything is fine ..."
+
+        _ ->
+            div [] [ text model.message ]
+
+
 view : Model -> Html Msg
 view model =
     case model.display of
         Index ->
             div []
                 [ div [ class "header" ]
-                    [ h1 [] [ text "Tasks" ] ]
+                    [ h1 [] [ text "Tasks" ]
+                    , viewMessage model
+                    ]
                 , div [ class "content-flow" ]
                     [ viewContent model
                     ]
@@ -353,7 +367,9 @@ view model =
         Show ->
             div []
                 [ div [ class "header" ]
-                    [ h1 [] [ text "Task" ] ]
+                    [ h1 [] [ text "Task" ]
+                    , viewMessage model
+                    ]
                 , div [ class "content-flow" ]
                     [ viewTask model.task
                     ]
@@ -372,7 +388,11 @@ update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
         LoadTasks (Ok tasks) ->
-            ( { model | tasks = tasks, error = Nothing, display = Index }
+            ( { model
+                | tasks = tasks
+                , error = Nothing
+                , display = Index
+              }
             , Cmd.none
             )
 
@@ -392,6 +412,7 @@ update msg model =
                 | task = getNth taskId model.tasks
                 , error = Nothing
                 , display = Show
+                , message = "Thank you for choosing the task with id " ++ toString taskId
               }
             , Cmd.none
             )
@@ -402,12 +423,16 @@ update msg model =
                 , task = Nothing
                 , error = Nothing
                 , display = Index
+                , message = "You deleted the task with id " ++ toString taskId
               }
             , Cmd.none
             )
 
         ShowTasks ->
-            ( { model | display = Index }
+            ( { model
+                | display = Index
+                , message = "Back to the index"
+              }
             , Cmd.none
             )
 

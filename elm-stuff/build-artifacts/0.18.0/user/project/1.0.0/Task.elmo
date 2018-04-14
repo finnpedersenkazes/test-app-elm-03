@@ -1,30 +1,45 @@
 var _user$project$Task$subscriptions = function (model) {
 	return _elm_lang$core$Platform_Sub$none;
 };
+var _user$project$Task$viewMessage = function (model) {
+	var _p0 = model.message;
+	if (_p0 === '') {
+		return _elm_lang$html$Html$text('Everything is fine ...');
+	} else {
+		return A2(
+			_elm_lang$html$Html$div,
+			{ctor: '[]'},
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html$text(model.message),
+				_1: {ctor: '[]'}
+			});
+	}
+};
 var _user$project$Task$errorMessage = function (error) {
-	var _p0 = error;
-	switch (_p0.ctor) {
+	var _p1 = error;
+	switch (_p1.ctor) {
 		case 'BadUrl':
-			return _p0._0;
+			return _p1._0;
 		case 'Timeout':
 			return 'Timeout';
 		case 'NetworkError':
 			return 'NetworkError';
 		case 'BadStatus':
-			var _p1 = _p0._0;
+			var _p2 = _p1._0;
 			return A2(
 				_elm_lang$core$Basics_ops['++'],
-				_p1.url,
-				A2(_elm_lang$core$Basics_ops['++'], ' ', _p1.status.message));
+				_p2.url,
+				A2(_elm_lang$core$Basics_ops['++'], ' ', _p2.status.message));
 		default:
-			var _p2 = _p0._1;
+			var _p3 = _p1._1;
 			return A2(
 				_elm_lang$core$Basics_ops['++'],
-				_p0._0,
+				_p1._0,
 				A2(
 					_elm_lang$core$Basics_ops['++'],
-					_p2.url,
-					A2(_elm_lang$core$Basics_ops['++'], ' ', _p2.status.message)));
+					_p3.url,
+					A2(_elm_lang$core$Basics_ops['++'], ' ', _p3.status.message)));
 	}
 };
 var _user$project$Task$viewStatus = F2(
@@ -46,13 +61,13 @@ var _user$project$Task$viewStatus = F2(
 							_elm_lang$core$Basics_ops['++'],
 							': ',
 							function () {
-								var _p3 = status;
-								if (_p3.ctor === 'Nothing') {
+								var _p4 = status;
+								if (_p4.ctor === 'Nothing') {
 									return '';
 								} else {
-									var _p5 = _p3._0;
-									var _p4 = _p5;
-									switch (_p4) {
+									var _p6 = _p4._0;
+									var _p5 = _p6;
+									switch (_p5) {
 										case 'unplanned':
 											return 'Unplanned';
 										case 'planned':
@@ -62,7 +77,7 @@ var _user$project$Task$viewStatus = F2(
 										case 'deleted':
 											return 'Deleted';
 										default:
-											return _p5;
+											return _p6;
 									}
 								}
 							}()))),
@@ -88,13 +103,13 @@ var _user$project$Task$viewUrgency = F2(
 							_elm_lang$core$Basics_ops['++'],
 							': ',
 							function () {
-								var _p6 = urgency;
-								if (_p6.ctor === 'Nothing') {
+								var _p7 = urgency;
+								if (_p7.ctor === 'Nothing') {
 									return '';
 								} else {
-									var _p8 = _p6._0;
-									var _p7 = _p8;
-									switch (_p7) {
+									var _p9 = _p7._0;
+									var _p8 = _p9;
+									switch (_p8) {
 										case 'just_do_it':
 											return 'Just Do It';
 										case 'plan_it':
@@ -104,7 +119,7 @@ var _user$project$Task$viewUrgency = F2(
 										case 'dont_do_it':
 											return 'Don\'t Do It';
 										default:
-											return _p8;
+											return _p9;
 									}
 								}
 							}()))),
@@ -150,11 +165,11 @@ var _user$project$Task$viewTime = F2(
 				ctor: '::',
 				_0: _elm_lang$html$Html$text(
 					function () {
-						var _p9 = time;
-						if (_p9.ctor === 'Nothing') {
+						var _p10 = time;
+						if (_p10.ctor === 'Nothing') {
 							return field;
 						} else {
-							var _p10 = _p9._0;
+							var _p11 = _p10._0;
 							return A2(
 								_elm_lang$core$Basics_ops['++'],
 								field,
@@ -165,13 +180,13 @@ var _user$project$Task$viewTime = F2(
 										_elm_lang$core$Basics_ops['++'],
 										_elm_lang$core$Basics$toString(
 											_elm_lang$core$Date$hour(
-												_elm_lang$core$Date$fromTime(_p10))),
+												_elm_lang$core$Date$fromTime(_p11))),
 										A2(
 											_elm_lang$core$Basics_ops['++'],
 											':',
 											_elm_lang$core$Basics$toString(
 												_elm_lang$core$Date$minute(
-													_elm_lang$core$Date$fromTime(_p10)))))));
+													_elm_lang$core$Date$fromTime(_p11)))))));
 						}
 					}()),
 				_1: {ctor: '[]'}
@@ -190,11 +205,11 @@ var _user$project$Task$viewDate = F2(
 				ctor: '::',
 				_0: _elm_lang$html$Html$text(
 					function () {
-						var _p11 = date;
-						if (_p11.ctor === 'Nothing') {
+						var _p12 = date;
+						if (_p12.ctor === 'Nothing') {
 							return field;
 						} else {
-							var _p12 = _p11._0;
+							var _p13 = _p12._0;
 							return A2(
 								_elm_lang$core$Basics_ops['++'],
 								field,
@@ -204,19 +219,19 @@ var _user$project$Task$viewDate = F2(
 									A2(
 										_elm_lang$core$Basics_ops['++'],
 										_elm_lang$core$Basics$toString(
-											_elm_lang$core$Date$day(_p12)),
+											_elm_lang$core$Date$day(_p13)),
 										A2(
 											_elm_lang$core$Basics_ops['++'],
 											' ',
 											A2(
 												_elm_lang$core$Basics_ops['++'],
 												_elm_lang$core$Basics$toString(
-													_elm_lang$core$Date$month(_p12)),
+													_elm_lang$core$Date$month(_p13)),
 												A2(
 													_elm_lang$core$Basics_ops['++'],
 													' ',
 													_elm_lang$core$Basics$toString(
-														_elm_lang$core$Date$year(_p12))))))));
+														_elm_lang$core$Date$year(_p13))))))));
 						}
 					}()),
 				_1: {ctor: '[]'}
@@ -224,7 +239,7 @@ var _user$project$Task$viewDate = F2(
 	});
 var _user$project$Task$dropNth = function (n) {
 	return _elm_lang$core$List$filter(
-		function (_p13) {
+		function (_p14) {
 			return A2(
 				F2(
 					function (x, y) {
@@ -233,12 +248,12 @@ var _user$project$Task$dropNth = function (n) {
 				n,
 				function (_) {
 					return _.id;
-				}(_p13));
+				}(_p14));
 		});
 };
 var _user$project$Task$getNth = function (n) {
 	return _elm_community$list_extra$List_Extra$find(
-		function (_p14) {
+		function (_p15) {
 			return A2(
 				F2(
 					function (x, y) {
@@ -247,25 +262,25 @@ var _user$project$Task$getNth = function (n) {
 				n,
 				function (_) {
 					return _.id;
-				}(_p14));
+				}(_p15));
 		});
 };
 var _user$project$Task$findTask = F2(
 	function (id, tasks) {
 		findTask:
 		while (true) {
-			var _p15 = tasks;
-			if (_p15.ctor === '[]') {
+			var _p16 = tasks;
+			if (_p16.ctor === '[]') {
 				return _elm_lang$core$Maybe$Nothing;
 			} else {
-				var _p16 = _p15._0;
-				if (_elm_lang$core$Native_Utils.eq(_p16.id, id)) {
-					return _elm_lang$core$Maybe$Just(_p16);
+				var _p17 = _p16._0;
+				if (_elm_lang$core$Native_Utils.eq(_p17.id, id)) {
+					return _elm_lang$core$Maybe$Just(_p17);
 				} else {
-					var _v8 = id,
-						_v9 = _p15._1;
-					id = _v8;
-					tasks = _v9;
+					var _v9 = id,
+						_v10 = _p16._1;
+					id = _v9;
+					tasks = _v10;
 					continue findTask;
 				}
 			}
@@ -273,23 +288,23 @@ var _user$project$Task$findTask = F2(
 	});
 var _user$project$Task$time = function () {
 	var convert = function (raw) {
-		var _p17 = _elm_lang$core$Date$fromString(raw);
-		if (_p17.ctor === 'Ok') {
+		var _p18 = _elm_lang$core$Date$fromString(raw);
+		if (_p18.ctor === 'Ok') {
 			return _elm_lang$core$Json_Decode$succeed(
-				_elm_lang$core$Date$toTime(_p17._0));
+				_elm_lang$core$Date$toTime(_p18._0));
 		} else {
-			return _elm_lang$core$Json_Decode$fail(_p17._0);
+			return _elm_lang$core$Json_Decode$fail(_p18._0);
 		}
 	};
 	return A2(_elm_lang$core$Json_Decode$andThen, convert, _elm_lang$core$Json_Decode$string);
 }();
 var _user$project$Task$date = function () {
 	var convert = function (raw) {
-		var _p18 = _elm_lang$core$Date$fromString(raw);
-		if (_p18.ctor === 'Ok') {
-			return _elm_lang$core$Json_Decode$succeed(_p18._0);
+		var _p19 = _elm_lang$core$Date$fromString(raw);
+		if (_p19.ctor === 'Ok') {
+			return _elm_lang$core$Json_Decode$succeed(_p19._0);
 		} else {
-			return _elm_lang$core$Json_Decode$fail(_p18._0);
+			return _elm_lang$core$Json_Decode$fail(_p19._0);
 		}
 	};
 	return A2(_elm_lang$core$Json_Decode$andThen, convert, _elm_lang$core$Json_Decode$string);
@@ -357,9 +372,9 @@ var _user$project$Task$taskDecoder = A3(
 										'id',
 										_elm_lang$core$Json_Decode$int,
 										_NoRedInk$elm_decode_pipeline$Json_Decode_Pipeline$decode(_user$project$Task$Task)))))))))));
-var _user$project$Task$Model = F4(
-	function (a, b, c, d) {
-		return {tasks: a, task: b, error: c, display: d};
+var _user$project$Task$Model = F5(
+	function (a, b, c, d, e) {
+		return {tasks: a, task: b, error: c, display: d, message: e};
 	});
 var _user$project$Task$Show = {ctor: 'Show'};
 var _user$project$Task$Index = {ctor: 'Index'};
@@ -367,19 +382,20 @@ var _user$project$Task$initialModel = {
 	tasks: {ctor: '[]'},
 	task: _elm_lang$core$Maybe$Nothing,
 	error: _elm_lang$core$Maybe$Nothing,
-	display: _user$project$Task$Index
+	display: _user$project$Task$Index,
+	message: ''
 };
 var _user$project$Task$update = F2(
 	function (msg, model) {
-		var _p19 = msg;
-		switch (_p19.ctor) {
+		var _p20 = msg;
+		switch (_p20.ctor) {
 			case 'LoadTasks':
-				if (_p19._0.ctor === 'Ok') {
+				if (_p20._0.ctor === 'Ok') {
 					return {
 						ctor: '_Tuple2',
 						_0: _elm_lang$core$Native_Utils.update(
 							model,
-							{tasks: _p19._0._0, error: _elm_lang$core$Maybe$Nothing, display: _user$project$Task$Index}),
+							{tasks: _p20._0._0, error: _elm_lang$core$Maybe$Nothing, display: _user$project$Task$Index}),
 						_1: _elm_lang$core$Platform_Cmd$none
 					};
 				} else {
@@ -388,19 +404,19 @@ var _user$project$Task$update = F2(
 						_0: _elm_lang$core$Native_Utils.update(
 							model,
 							{
-								error: _elm_lang$core$Maybe$Just(_p19._0._0)
+								error: _elm_lang$core$Maybe$Just(_p20._0._0)
 							}),
 						_1: _elm_lang$core$Platform_Cmd$none
 					};
 				}
 			case 'LoadTask':
-				if (_p19._0.ctor === 'Ok') {
+				if (_p20._0.ctor === 'Ok') {
 					return {
 						ctor: '_Tuple2',
 						_0: _elm_lang$core$Native_Utils.update(
 							model,
 							{
-								task: _elm_lang$core$Maybe$Just(_p19._0._0),
+								task: _elm_lang$core$Maybe$Just(_p20._0._0),
 								error: _elm_lang$core$Maybe$Nothing,
 								display: _user$project$Task$Show
 							}),
@@ -413,33 +429,43 @@ var _user$project$Task$update = F2(
 							model,
 							{
 								task: _elm_lang$core$Maybe$Nothing,
-								error: _elm_lang$core$Maybe$Just(_p19._0._0)
+								error: _elm_lang$core$Maybe$Just(_p20._0._0)
 							}),
 						_1: _elm_lang$core$Platform_Cmd$none
 					};
 				}
 			case 'ShowTask':
+				var _p21 = _p20._0;
 				return {
 					ctor: '_Tuple2',
 					_0: _elm_lang$core$Native_Utils.update(
 						model,
 						{
-							task: A2(_user$project$Task$getNth, _p19._0, model.tasks),
+							task: A2(_user$project$Task$getNth, _p21, model.tasks),
 							error: _elm_lang$core$Maybe$Nothing,
-							display: _user$project$Task$Show
+							display: _user$project$Task$Show,
+							message: A2(
+								_elm_lang$core$Basics_ops['++'],
+								'Thank you for choosing the task with id ',
+								_elm_lang$core$Basics$toString(_p21))
 						}),
 					_1: _elm_lang$core$Platform_Cmd$none
 				};
 			case 'DeleteTask':
+				var _p22 = _p20._0;
 				return {
 					ctor: '_Tuple2',
 					_0: _elm_lang$core$Native_Utils.update(
 						model,
 						{
-							tasks: A2(_user$project$Task$dropNth, _p19._0, model.tasks),
+							tasks: A2(_user$project$Task$dropNth, _p22, model.tasks),
 							task: _elm_lang$core$Maybe$Nothing,
 							error: _elm_lang$core$Maybe$Nothing,
-							display: _user$project$Task$Index
+							display: _user$project$Task$Index,
+							message: A2(
+								_elm_lang$core$Basics_ops['++'],
+								'You deleted the task with id ',
+								_elm_lang$core$Basics$toString(_p22))
 						}),
 					_1: _elm_lang$core$Platform_Cmd$none
 				};
@@ -448,7 +474,7 @@ var _user$project$Task$update = F2(
 					ctor: '_Tuple2',
 					_0: _elm_lang$core$Native_Utils.update(
 						model,
-						{display: _user$project$Task$Index}),
+						{display: _user$project$Task$Index, message: 'Back to the index'}),
 					_1: _elm_lang$core$Platform_Cmd$none
 				};
 		}
@@ -458,9 +484,9 @@ var _user$project$Task$DeleteTask = function (a) {
 	return {ctor: 'DeleteTask', _0: a};
 };
 var _user$project$Task$viewTask = function (maybeTask) {
-	var _p20 = maybeTask;
-	if (_p20.ctor === 'Just') {
-		var _p21 = _p20._0;
+	var _p23 = maybeTask;
+	if (_p23.ctor === 'Just') {
+		var _p24 = _p23._0;
 		return A2(
 			_elm_lang$html$Html$div,
 			{
@@ -492,7 +518,7 @@ var _user$project$Task$viewTask = function (maybeTask) {
 							},
 							{
 								ctor: '::',
-								_0: _elm_lang$html$Html$text(_p21.title),
+								_0: _elm_lang$html$Html$text(_p24.title),
 								_1: {ctor: '[]'}
 							}),
 						_1: {
@@ -507,30 +533,30 @@ var _user$project$Task$viewTask = function (maybeTask) {
 								{
 									ctor: '::',
 									_0: _elm_lang$html$Html$text(
-										A2(_elm_lang$core$Maybe$withDefault, '', _p21.description)),
+										A2(_elm_lang$core$Maybe$withDefault, '', _p24.description)),
 									_1: {ctor: '[]'}
 								}),
 							_1: {
 								ctor: '::',
-								_0: A2(_user$project$Task$viewUrgency, 'Urgency', _p21.urgency),
+								_0: A2(_user$project$Task$viewUrgency, 'Urgency', _p24.urgency),
 								_1: {
 									ctor: '::',
-									_0: A2(_user$project$Task$viewDuration, 'Duration', _p21.duration_minutes),
+									_0: A2(_user$project$Task$viewDuration, 'Duration', _p24.duration_minutes),
 									_1: {
 										ctor: '::',
-										_0: A2(_user$project$Task$viewDate, 'Attention Date', _p21.attention_date),
+										_0: A2(_user$project$Task$viewDate, 'Attention Date', _p24.attention_date),
 										_1: {
 											ctor: '::',
-											_0: A2(_user$project$Task$viewDate, 'Deadline', _p21.deadline),
+											_0: A2(_user$project$Task$viewDate, 'Deadline', _p24.deadline),
 											_1: {
 												ctor: '::',
-												_0: A2(_user$project$Task$viewDate, 'Planned Date', _p21.planned_date),
+												_0: A2(_user$project$Task$viewDate, 'Planned Date', _p24.planned_date),
 												_1: {
 													ctor: '::',
-													_0: A2(_user$project$Task$viewTime, 'Planned Starting Time', _p21.planned_starting_time),
+													_0: A2(_user$project$Task$viewTime, 'Planned Starting Time', _p24.planned_starting_time),
 													_1: {
 														ctor: '::',
-														_0: A2(_user$project$Task$viewStatus, 'Status Fidus', _p21.status),
+														_0: A2(_user$project$Task$viewStatus, 'Status Fidus', _p24.status),
 														_1: {
 															ctor: '::',
 															_0: A2(
@@ -559,7 +585,7 @@ var _user$project$Task$viewTask = function (maybeTask) {
 																		_1: {
 																			ctor: '::',
 																			_0: _elm_lang$html$Html_Events$onClick(
-																				_user$project$Task$DeleteTask(_p21.id)),
+																				_user$project$Task$DeleteTask(_p24.id)),
 																			_1: {ctor: '[]'}
 																		}
 																	},
@@ -664,8 +690,8 @@ var _user$project$Task$viewTasks = function (tasks) {
 		A2(_elm_lang$core$List$map, _user$project$Task$viewDetailedTask, tasks));
 };
 var _user$project$Task$viewContent = function (model) {
-	var _p22 = model.error;
-	if (_p22.ctor === 'Just') {
+	var _p25 = model.error;
+	if (_p25.ctor === 'Just') {
 		return A2(
 			_elm_lang$html$Html$div,
 			{
@@ -676,7 +702,7 @@ var _user$project$Task$viewContent = function (model) {
 			{
 				ctor: '::',
 				_0: _elm_lang$html$Html$text(
-					_user$project$Task$errorMessage(_p22._0)),
+					_user$project$Task$errorMessage(_p25._0)),
 				_1: {ctor: '[]'}
 			});
 	} else {
@@ -691,8 +717,8 @@ var _user$project$Task$viewContent = function (model) {
 	}
 };
 var _user$project$Task$view = function (model) {
-	var _p23 = model.display;
-	if (_p23.ctor === 'Index') {
+	var _p26 = model.display;
+	if (_p26.ctor === 'Index') {
 		return A2(
 			_elm_lang$html$Html$div,
 			{ctor: '[]'},
@@ -715,7 +741,11 @@ var _user$project$Task$view = function (model) {
 								_0: _elm_lang$html$Html$text('Tasks'),
 								_1: {ctor: '[]'}
 							}),
-						_1: {ctor: '[]'}
+						_1: {
+							ctor: '::',
+							_0: _user$project$Task$viewMessage(model),
+							_1: {ctor: '[]'}
+						}
 					}),
 				_1: {
 					ctor: '::',
@@ -757,7 +787,11 @@ var _user$project$Task$view = function (model) {
 								_0: _elm_lang$html$Html$text('Task'),
 								_1: {ctor: '[]'}
 							}),
-						_1: {ctor: '[]'}
+						_1: {
+							ctor: '::',
+							_0: _user$project$Task$viewMessage(model),
+							_1: {ctor: '[]'}
+						}
 					}),
 				_1: {
 					ctor: '::',
