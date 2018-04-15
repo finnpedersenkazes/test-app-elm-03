@@ -71,11 +71,11 @@ type alias Tasks =
 type TaskState
     = Index
     | Show
+    | Edit
 
 
 
 --| New
---| Edit
 --| Delete
 
 
@@ -287,7 +287,22 @@ viewTask maybeTask =
 
         Nothing ->
             div [ class "loading-task" ]
-                [ text "Loading Task ... v2" ]
+                [ text "Loading Task ... viewTask" ]
+
+
+editTask : Maybe Task -> Html Msg
+editTask maybeTask =
+    case maybeTask of
+        Just task ->
+            div [ class "detailed-task" ]
+                [ div [ class "task-info" ]
+                    [ input [ placeholder task.title, onInput ChangeTitle ] [] ]
+                , button [ onClick SaveTask ] [ text "Save" ]
+                ]
+
+        Nothing ->
+            div [ class "loading-task" ]
+                [ text "Loading Task ... editTask" ]
 
 
 viewDetailedTask : Task -> Html Msg
@@ -375,6 +390,17 @@ view model =
                     ]
                 ]
 
+        Edit ->
+            div []
+                [ div [ class "header" ]
+                    [ h1 [] [ text "Edit Task" ]
+                    , viewMessage model
+                    ]
+                , div [ class "content-flow" ]
+                    [ editTask model.task
+                    ]
+                ]
+
 
 type Msg
     = LoadTasks (Result Http.Error Tasks)
@@ -382,6 +408,7 @@ type Msg
     | ShowTask Id
     | DeleteTask Id
     | ShowTasks
+    | ChangeTitle String
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -432,6 +459,17 @@ update msg model =
             ( { model
                 | display = Index
                 , message = "Back to the index"
+              }
+            , Cmd.none
+            )
+
+        ChangeTitle taskTitle ->
+            let
+                updatedTask =
+                    { task | title = taskTitle }
+            in
+            ( { model
+                | task = updatedTask
               }
             , Cmd.none
             )
